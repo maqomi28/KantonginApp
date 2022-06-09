@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/Pelatihan Dicoding Bangkit 2022/New Project/Kantongin App/app/src/main/res/drawable/border_edit.xml" value="0.1435" />
+        <entry key="..\:/Pelatihan Dicoding Bangkit 2022/New Project/Kantongin App/app/src/main/res/drawable/ic_add.xml" value="0.1435" />
+        <entry key="..\:/Pelatihan Dicoding Bangkit 2022/New Project/Kantongin App/app/src/main/res/drawable/ic_balance.xml" value="0.1435" />
+        <entry key="..\:/Pelatihan Dicoding Bangkit 2022/New Project/Kantongin App/app/src/main/res/drawable/ic_date_range.xml" value="0.1435" />
+        <entry key="..\:/Pelatihan Dicoding Bangkit 2022/New Project/Kantongin App/app/src/main/res/drawable/ic_in.xml" value="0.1435" />
+        <entry key="..\:/Pelatihan Dicoding Bangkit 2022/New Project/Kantongin App/app/src/main/res/drawable/ic_logout.xml" value="0.1435" />
+        <entry key="..\:/Pelatihan Dicoding Bangkit 2022/New Project/Kantongin App/app/src/main/res/drawable/ic_out.xml" value="0.1435" />
+        <entry key="..\:/Pelatihan Dicoding Bangkit 2022/New Project/Kantongin App/app/src/main/res/layout/activity_create.xml" value="0.264" />
+        <entry key="..\:/Pelatihan Dicoding Bangkit 2022/New Project/Kantongin App/app/src/main/res/layout/activity_home.xml" value="0.264" />
+        <entry key="..\:/Pelatihan Dicoding Bangkit 2022/New Project/Kantongin App/app/src/main/res/layout/activity_login.xml" value="0.25052083333333336" />
+        <entry key="..\:/Pelatihan Dicoding Bangkit 2022/New Project/Kantongin App/app/src/main/res/layout/activity_main.xml" value="0.25416666666666665" />
+        <entry key="..\:/Pelatihan Dicoding Bangkit 2022/New Project/Kantongin App/app/src/main/res/layout/activity_profile.xml" value="0.25052083333333336" />
+        <entry key="..\:/Pelatihan Dicoding Bangkit 2022/New Project/Kantongin App/app/src/main/res/layout/activity_register.xml" value="0.25052083333333336" />
+        <entry key="..\:/Pelatihan Dicoding Bangkit 2022/New Project/Kantongin App/app/src/main/res/layout/activity_splash.xml" value="0.25416666666666665" />
+        <entry key="..\:/Pelatihan Dicoding Bangkit 2022/New Project/Kantongin App/app/src/main/res/layout/activity_transaction.xml" value="0.25052083333333336" />
+        <entry key="..\:/Pelatihan Dicoding Bangkit 2022/New Project/Kantongin App/app/src/main/res/layout/adapter_avatar.xml" value="0.24947916666666667" />
+        <entry key="..\:/Pelatihan Dicoding Bangkit 2022/New Project/Kantongin App/app/src/main/res/layout/adapter_category.xml" value="0.25052083333333336" />
+        <entry key="..\:/Pelatihan Dicoding Bangkit 2022/New Project/Kantongin App/app/src/main/res/layout/adapter_transaction.xml" value="0.264" />
+        <entry key="..\:/Pelatihan Dicoding Bangkit 2022/New Project/Kantongin App/app/src/main/res/layout/fragment_avatar.xml" value="0.23645833333333333" />
+        <entry key="..\:/Pelatihan Dicoding Bangkit 2022/New Project/Kantongin App/app/src/main/res/layout/fragment_date.xml" value="0.25052083333333336" />
+        <entry key="..\:/Pelatihan Dicoding Bangkit 2022/New Project/Kantongin App/app/src/main/res/layout/fragment_profile.xml" value="0.23645833333333333" />
+        <entry key="..\:/Pelatihan Dicoding Bangkit 2022/New Project/Kantongin App/app/src/main/res/layout/home_avatar.xml" value="0.25052083333333336" />
+        <entry key="..\:/Pelatihan Dicoding Bangkit 2022/New Project/Kantongin App/app/src/main/res/layout/home_dashboard.xml" value="0.25052083333333336" />
+      </map>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/build/classes" />
+  </component>
+  <component name="ProjectType">
+    <option name="id" value="Android" />
+  </component>
+</project>
