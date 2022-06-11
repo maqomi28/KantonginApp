@@ -14,10 +14,10 @@ class Retro {
             .addInterceptor(loggingInterceptor)
             .build()
         val retrofit = Retrofit.Builder()
-            .baseUrl("https://story-api.dicoding.dev/")
+            .baseUrl("https://us-central1-personal-project-350602.cloudfunctions.net/kantonginAppBeta/")
             .addConverterFactory(GsonConverterFactory.create())
             .client(client)
             .build()
         return retrofit.create(Api::class.java)
     }
-a
+}

@@ -116,7 +116,6 @@ class TransactionActivity : BaseActivity() {
             transactions.add(
                 Transaction(
                     id = doc.reference.id,
-                    username = doc.data["username"].toString(),
                     category = doc.data["category"].toString(),
                     type = doc.data["type"].toString(),
                     amount = doc.data["amount"].toString().toInt(),

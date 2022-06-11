@@ -71,73 +71,95 @@ class HomeActivity : BaseActivity() {
         bindingAvatar.imageAvatar.setImageResource(pref.getInt(PrefUtil.pref_avatar)!!)
     }
     private fun getBalance(){
-        var totalBalance = 0
         var totalIn = 0
         var totalOut = 0
-        db.collection("transaction")
-            .whereEqualTo("username", pref.getString(PrefUtil.pref_username))
-            .get()
-            .addOnSuccessListener { result ->
-                result.forEach { doc ->
-                    totalBalance += doc.data["amount"].toString().toInt()
-                    when(doc.data["type"].toString()){
-                        "IN" -> totalIn += doc.data["amount"].toString().toInt()
-                        "OUT" -> totalOut += doc.data["amount"].toString().toInt()
+        val retro = Retro().getApiService()
+        pref.getString(PrefUtil.pref_email)?.let {
+            retro.getTransaction(it).enqueue(object : Callback<ArrayList<Transaction>>{
+                override fun onResponse(
+                    call: Call<ArrayList<Transaction>>,
+                    response: Response<ArrayList<Transaction>>
+                ) { response.body()!!.forEach { doc ->
+                    when(doc.type){
+                        "IN" -> totalIn += doc.amount
+                        "EX" -> totalOut += doc.amount
                     }
                 }
-                bindingDashboard.textBalance.text = amountFormat(totalBalance)
-                bindingDashboard.textIn.text = amountFormat(totalIn)
-                bindingDashboard.textOut.text = amountFormat(totalOut)
-            }
-    }
-
-    private fun getData(){
-        binding.progress.visibility = View.VISIBLE
-        val transactions: ArrayList<Transaction> = arrayListOf()
-        db.collection("transaction")
-            .orderBy("created", Query.Direction.DESCENDING)
-            .whereEqualTo("username", pref.getString(PrefUtil.pref_username))
-            .limit(4)
-            .get()
-            .addOnSuccessListener { result ->
-                binding.progress.visibility = View.GONE
-                result.forEach { doc ->
-                    transactions.add(
-                        Transaction(
-                            id = doc.reference.id,
-                            username = doc.data["username"].toString(),
-                            category = doc.data["category"].toString(),
-                            type = doc.data["type"].toString(),
-                            amount = doc.data["amount"].toString().toInt(),
-                            note = doc.data["note"].toString(),
-                            created = doc.data["created"] as Timestamp
-
-                        )
-                    )
+                    bindingDashboard.textBalance.text = amountFormat(totalIn - totalOut)
+                    bindingDashboard.textIn.text = amountFormat(totalIn)
+                    bindingDashboard.textOut.text = amountFormat(totalOut)
                 }
-                transactionAdapter.setData(transactions)
-            }
+
+                override fun onFailure(call: Call<ArrayList<Transaction>>, t: Throwable) {
+                    Log.e("Gagal", t.message.toString())
+                }
+
+            })
+        }
     }
 
 //    private fun getData(){
-//        val transactions: ArrayList<Transaction> = arrayListOf()
 //        binding.progress.visibility = View.VISIBLE
-//        val retro = Retro().getRetroClientInstance().create(Api::class.java)
-//        retro.getTransaction().enqueue(object : Callback<ArrayList<Transaction>>{
-//            override fun onResponse(
-//                call: Call<ArrayList<Transaction>>,
-//                response: Response<ArrayList<Transaction>>
-//            ) { binding.progress.visibility = View.GONE
-//                response.body()
+//        val transactions: ArrayList<Transaction> = arrayListOf()
+//        db.collection("transaction")
+//            .orderBy("created", Query.Direction.DESCENDING)
+//            .whereEqualTo("username", pref.getString(PrefUtil.pref_username))
+//            .limit(4)
+//            .get()
+//            .addOnSuccessListener { result ->
+//                binding.progress.visibility = View.GONE
+//                result.forEach { doc ->
+//                    transactions.add(
+//                        Transaction(
+//                            id = doc.reference.id,
+//                            username = doc.data["username"].toString(),
+//                            category = doc.data["category"].toString(),
+//                            type = doc.data["type"].toString(),
+//                            amount = doc.data["amount"].toString().toInt(),
+//                            note = doc.data["note"].toString(),
+//                            created = doc.data["created"] as Timestamp
+//
+//                        )
+//                    )
+//                }
 //                transactionAdapter.setData(transactions)
 //            }
-//
-//            override fun onFailure(call: Call<ArrayList<Transaction>>, t: Throwable) {
-//                Log.e("Gagal", t.message.toString())
-//            }
-//
-//        })
 //    }
+
+    private fun getData(){
+        val transactions: ArrayList<Transaction> = arrayListOf()
+        binding.progress.visibility = View.VISIBLE
+        val retro = Retro().getApiService()
+        pref.getString(PrefUtil.pref_email)?.let {
+            retro.getTransaction(it).enqueue(object : Callback<ArrayList<Transaction>>{
+                override fun onResponse(
+                    call: Call<ArrayList<Transaction>>,
+                    response: Response<ArrayList<Transaction>>
+                ) { binding.progress.visibility = View.GONE
+                    Log.d("Test",response.body().toString())
+                    response.body()!!.forEach { doc ->
+                        transactions.add(
+                            Transaction(
+                                id = doc.id,
+                                category = doc.category,
+                                type = doc.type,
+                                amount = doc.amount,
+                                note = doc.note,
+                                created = doc.created
+
+                            )
+                        )
+                    }
+                    transactionAdapter.setData(transactions)
+                }
+
+                override fun onFailure(call: Call<ArrayList<Transaction>>, t: Throwable) {
+                    Log.e("Gagal", t.message.toString())
+                }
+
+            })
+        }
+    }
 
 
     private fun setupBinding(){
@@ -151,7 +173,7 @@ class HomeActivity : BaseActivity() {
             override fun onClick(transaction: Transaction) {
                 startActivity(
                     Intent(this@HomeActivity,UpdateActivity::class.java)
-                        .putExtra("id", transaction.id)
+                        .putExtra("noteId", transaction.id)
                 )
             }
 
@@ -237,12 +259,13 @@ class HomeActivity : BaseActivity() {
 
 
     private fun deleteTransaction(id: String){
-        db.collection("transaction")
-            .document(id)
-            .delete()
-            .addOnSuccessListener {
-                getData()
-                getBalance()
-            }
+
+//        db.collection("transaction")
+//            .document(id)
+//            .delete()
+//            .addOnSuccessListener {
+//                getData()
+//                getBalance()
+//            }
     }
 }
