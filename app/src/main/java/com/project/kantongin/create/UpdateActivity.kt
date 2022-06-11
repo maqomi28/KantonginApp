@@ -200,6 +200,8 @@ class UpdateActivity : BaseActivity() {
                         )
                         binding.editAmount.setText(transaction.amount.toString())
                         binding.editNote.setText(transaction.note.toString())
+                        category = transaction.category
+                        type = transaction.type
 
                         when (transaction.type) {
                             "IN" -> setButton(binding.buttonIn)

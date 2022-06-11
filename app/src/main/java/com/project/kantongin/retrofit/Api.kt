@@ -21,7 +21,13 @@ interface Api {
     @PUT("kantongku/{userEmail}")
     fun putTransaction(@Body requestBody: UpdateData, @Path("userEmail") userEmail: String):Call<TransactionResponse>
 
-    @DELETE("kantongku/{userEmail}")
-    fun deleteTransaction(@Body requestBody: DeleteData, @Path("userEmail") userEmail: String): Call<TransactionResponse>
+//    @DELETE("kantongku/{userEmail}")
+//    fun deleteTransaction(@Body requestBody: DeleteData, @Path("userEmail") userEmail: String): Call<TransactionResponse>
+
+    @HTTP(method = "DELETE", path = "kantongku/{userEmail}", hasBody = true)
+    fun deleteTransaction(@Body requestBody: DeleteData,@Path("userEmail") userEmail: String): Call<TransactionResponse>
+
+
+
 
 }

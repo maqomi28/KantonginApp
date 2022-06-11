@@ -21,7 +21,9 @@ import com.project.kantongin.databinding.ActivityHomeBinding
 import com.project.kantongin.databinding.HomeAvatarBinding
 import com.project.kantongin.databinding.HomeDashboardBinding
 import com.project.kantongin.model.Category
+import com.project.kantongin.model.DeleteData
 import com.project.kantongin.model.Transaction
+import com.project.kantongin.model.TransactionResponse
 import com.project.kantongin.prefrences.PreferenceManager
 import com.project.kantongin.profile.ProfileActivity
 import com.project.kantongin.retrofit.Api
@@ -46,7 +48,6 @@ class HomeActivity : BaseActivity() {
     private lateinit var bindingDashboard : HomeDashboardBinding
     private lateinit var transactionAdapter : TransactionAdapter
 
-    private val db by lazy { Firebase.firestore }
     private val pref by lazy { PreferenceManager(this) }
 
     private var clicked = false
@@ -257,15 +258,34 @@ class HomeActivity : BaseActivity() {
         }
     }
 
-
-    private fun deleteTransaction(id: String){
-
-//        db.collection("transaction")
+    //        db.collection("transaction")
 //            .document(id)
 //            .delete()
 //            .addOnSuccessListener {
 //                getData()
 //                getBalance()
 //            }
+
+
+    private fun deleteTransaction(id: String) {
+        val delete = DeleteData(
+            noteId = id
+        )
+        val retro = Retro().getApiService()
+        pref.getString(PrefUtil.pref_email)?.let { it1 ->
+            retro.deleteTransaction(delete,it1).enqueue(object : Callback<TransactionResponse> {
+                override fun onResponse(
+                    call: Call<TransactionResponse>,
+                    response: Response<TransactionResponse>
+                ) {
+                    getData()
+                    getBalance()
+                }
+
+                override fun onFailure(call: Call<TransactionResponse>, t: Throwable) {
+                    TODO("Not yet implemented")
+                }
+            })
+        }
     }
 }
