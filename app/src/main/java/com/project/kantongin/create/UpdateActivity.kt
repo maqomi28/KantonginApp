@@ -94,8 +94,8 @@ class UpdateActivity : BaseActivity() {
         val update = UpdateData(
             noteId = transactionId.toString(),
             note = binding.editNote.text.toString(),
-            category = category,
-            type = type,
+            category = transaction.category,
+            type = transaction.type,
             amount = binding.editAmount.text.toString().toInt(),
             created = Timestamp.now()
         )
